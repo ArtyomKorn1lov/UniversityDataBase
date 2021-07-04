@@ -445,7 +445,7 @@ namespace MyUniversity
                             JOIN [Group_Occupation] gro ON gro.GroupId = g.GroupId
                             JOIN [Occupation] oc ON oc.OccupationId = gro.OccupationId
                             GROUP BY oc.OccupationId
-                            order by oc.OccupationId";
+                            ORDER BY oc.OccupationId";
 
                     using ( SqlDataReader reader = command.ExecuteReader() )
                     {

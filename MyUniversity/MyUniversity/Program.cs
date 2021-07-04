@@ -14,100 +14,66 @@ namespace MyUniversity
                 Console.WriteLine( "Please enter the command: " );
                 string input_data = Console.ReadLine();
 
-                if ( input_data.Equals( "ReadCourses" ) )
+                switch ( input_data )
                 {
-                    CommandHandler.ReadCourses();
-                }
-
-                else if ( input_data.Equals( "ReadStudents" ) )
-                {
-                    CommandHandler.ReadStudents();
-                }
-
-                else if ( input_data.Equals( "ReadInstructors" ) )
-                {
-                    CommandHandler.ReadInstructors();
-                }
-
-                else if ( input_data.Equals( "ReadGroups" ) )
-                {
-                    CommandHandler.ReadGroups();
-                }
-
-                else if ( input_data.Equals( "ReadOccupations" ) )
-                {
-                    CommandHandler.ReadOccupations();
-                }
-
-                else if ( input_data.Equals( "ReadChairs" ) )
-                {
-                    CommandHandler.ReadChairs();
-                }
-
-                else if ( input_data.Equals( "ReadGroupToOccupations" ) )
-                {
-                    CommandHandler.ReadGroupToOccupations();
-                }
-
-                else if ( input_data.Equals( "AddCourse" ) )
-                {
-                    CommandHandler.AddCourse();
-                }
-
-                else if ( input_data.Equals( "AddStudent" ) )
-                {
-                    CommandHandler.AddStudent();
-                }
-
-                else if ( input_data.Equals( "AddInstructor" ) )
-                {
-                    CommandHandler.AddInstructor();
-                }
-
-                else if ( input_data.Equals( "AddChair" ) )
-                {
-                    CommandHandler.AddChair();
-                }
-
-                else if ( input_data.Equals( "AddGroup" ) )
-                {
-                    CommandHandler.AddGroup();
-                }
-
-                else if ( input_data.Equals( "AddOccupation" ) )
-                {
-                    CommandHandler.AddOccupation();
-                }
-
-                else if ( input_data.Equals( "AddGroupToOccupation" ) )
-                {
-                    CommandHandler.AddGroupToOccupation();
-                }
-
-                else if ( input_data.Equals( "ChangeInstructorOnCourse" ) )
-                {
-                    CommandHandler.ChangeInstructorOnCourse();
-                }
-
-                else if ( input_data.Equals( "ReportOccupations" ) )
-                {
-                    CommandHandler.ReportOccupations();
-                }
-
-                else if ( input_data.Equals( "GeneralReport" ) )
-                {
-                    CommandHandler.GeneralReport();
-                }
-
-                else if ( input_data.Equals( "exit" ) )
-                {
-                    Console.WriteLine( "This close\n" );
-                    flag = false;
-                }
-
-                else
-                {
-                    Console.WriteLine( "Unknown command, please enter again\n" );
+                    case "ReadCourses":
+                        CommandHandler.ReadCourses();
+                        break;
+                    case "ReadStudents":
+                        CommandHandler.ReadStudents();
+                        break;
+                    case "ReadInstructors":
+                        CommandHandler.ReadInstructors();
+                        break;
+                    case "ReadGroups":
+                        CommandHandler.ReadGroups();
+                        break;
+                    case "ReadOccupations":
+                        CommandHandler.ReadOccupations();
+                        break;
+                    case "ReadChairs":
+                        CommandHandler.ReadChairs();
+                        break;
+                    case "ReadGroupToOccupations":
+                        CommandHandler.ReadGroupToOccupations();
+                        break;
+                    case "AddCourse":
+                        CommandHandler.AddCourse();
+                        break;
+                    case "AddStudent":
+                        CommandHandler.AddStudent();
+                        break;
+                    case "AddInstructor":
+                        CommandHandler.AddInstructor();
+                        break;
+                    case "AddChair":
+                        CommandHandler.AddChair();
+                        break;
+                    case "AddGroup":
+                        CommandHandler.AddGroup();
+                        break;
+                    case "AddOccupation":
+                        CommandHandler.AddOccupation();
+                        break;
+                    case "AddGroupToOccupation":
+                        CommandHandler.AddGroupToOccupation();
+                        break;
+                    case "ChangeInstructorOnCourse":
+                        CommandHandler.ChangeInstructorOnCourse();
+                        break;
+                    case "ReportOccupations":
+                        CommandHandler.ReportOccupations();
+                        break;
+                    case "GeneralReport":
+                        CommandHandler.GeneralReport();
+                        break;
+                    case "exit":
+                        Console.WriteLine( "This close\n" );
+                        flag = false;
+                        break;
+                    default:
+                        Console.WriteLine( "Unknown command, please enter again\n" );
+                        break;
                 }
             }
         }
@@ -117,6 +83,7 @@ namespace MyUniversity
             Console.WriteLine( "- ReadCourses" );
             Console.WriteLine( "- ReadStudents" );
             Console.WriteLine( "- ReadInstructors" );
+            Console.WriteLine( "- ReadGroups" );
             Console.WriteLine( "- ReadOccupations" );
             Console.WriteLine( "- ReadChairs" );
             Console.WriteLine( "- ReadGroupToOccupations" );

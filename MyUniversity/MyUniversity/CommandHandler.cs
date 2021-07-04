@@ -101,60 +101,51 @@ namespace MyUniversity
             Console.WriteLine();
             Console.WriteLine( "Enter student name: " );
             string name = Console.ReadLine();
-
-            Console.WriteLine( "Enter student age: " );
-            int age;
-            bool isDigit1 = Int32.TryParse( Console.ReadLine(), out age );
-
-            ReadGroups();
-            Console.WriteLine( "Enter student group id: " );
-            int groupId;
-            bool isDigit2 = Int32.TryParse( Console.ReadLine(), out groupId );
-
             if ( name == "" )
             {
                 Console.WriteLine( "Student name is empty, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
+
+            Console.WriteLine( "Enter student age: " );
+            int age;
+            if ( !Int32.TryParse( Console.ReadLine(), out age ) )
             {
-                if ( !isDigit1 )
+                Console.WriteLine( "Student age is not digit, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            ReadGroups();
+            Console.WriteLine( "Enter student group id: " );
+            int groupId;
+            if ( !Int32.TryParse( Console.ReadLine(), out groupId ) )
+            {
+                Console.WriteLine( "Group id is not digit, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            List<Group> groups = QueryСlass.ReadGroups();
+            int counter = 0;
+            foreach ( Group group in groups )
+            {
+                if ( group.GroupId == groupId )
                 {
-                    Console.WriteLine( "Student age is not digit, please enter command again\n" );
-                    Console.WriteLine( "Error.\n" );
-                }
-                else
-                {
-                    if ( !isDigit2 )
-                    {
-                        Console.WriteLine( "Group id is not digit, please enter command again\n" );
-                        Console.WriteLine( "Error.\n" );
-                    }
-                    else
-                    {
-                        List<Group> groups = QueryСlass.ReadGroups();
-                        int counter = 0;
-                        foreach ( Group group in groups )
-                        {
-                            if ( group.GroupId == groupId )
-                            {
-                                counter++;
-                            }
-                        }
-                        if ( counter != 0 )
-                        {
-                            int createStudent = QueryСlass.InsertStudent( name, age, groupId );
-                            Console.WriteLine( "Created student: ", +createStudent + "\n" );
-                            Console.WriteLine( "Success.\n" );
-                        }
-                        else
-                        {
-                            Console.WriteLine( "This group id is not in the table, please enter command again\n" );
-                            Console.WriteLine( "Error.\n" );
-                        }
-                    }
+                    counter++;
                 }
             }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This group id is not in the table, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            int createStudent = QueryСlass.InsertStudent( name, age, groupId );
+            Console.WriteLine( "Created student: ", +createStudent + "\n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void AddInstructor()
@@ -162,48 +153,42 @@ namespace MyUniversity
             Console.WriteLine();
             Console.WriteLine( "Enter instructor name: " );
             string name = Console.ReadLine();
-
-            ReadChairs();
-            Console.WriteLine( "Enter instructor chair id: " );
-            int chairId;
-            bool isDigit = Int32.TryParse( Console.ReadLine(), out chairId );
-
             if ( name == "" )
             {
                 Console.WriteLine( "Instructor name is empty, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
+
+            ReadChairs();
+            Console.WriteLine( "Enter instructor chair id: " );
+            int chairId;
+            if ( !Int32.TryParse( Console.ReadLine(), out chairId ) )
             {
-                if ( !isDigit )
+                Console.WriteLine( "Chair id is not digit, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            List<Chair> chairs = QueryСlass.ReadChairs();
+            int counter = 0;
+            foreach ( Chair chair in chairs )
+            {
+                if ( chair.ChairId == chairId )
                 {
-                    Console.WriteLine( "Chair id is not digit, please enter command again\n" );
-                    Console.WriteLine( "Error.\n" );
-                }
-                else
-                {
-                    List<Chair> chairs = QueryСlass.ReadChairs();
-                    int counter = 0;
-                    foreach ( Chair chair in chairs )
-                    {
-                        if ( chair.ChairId == chairId )
-                        {
-                            counter++;
-                        }
-                    }
-                    if ( counter != 0 )
-                    {
-                        int createInstructor = QueryСlass.InsertInstructor( name, chairId );
-                        Console.WriteLine( "Created instructor: ", +createInstructor + "\n" );
-                        Console.WriteLine( "Success.\n" );
-                    }
-                    else
-                    {
-                        Console.WriteLine( "This chair id is not in the table, please enter command again\n" );
-                        Console.WriteLine( "Error.\n" );
-                    }
+                    counter++;
                 }
             }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This chair id is not in the table, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            int createInstructor = QueryСlass.InsertInstructor( name, chairId );
+            Console.WriteLine( "Created instructor: ", +createInstructor + "\n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void AddChair()
@@ -211,18 +196,16 @@ namespace MyUniversity
             Console.WriteLine();
             Console.WriteLine( "Enter chair name: " );
             string name = Console.ReadLine();
-
             if ( name == "" )
             {
                 Console.WriteLine( "Chair name is empty, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
-            {
-                int createChair = QueryСlass.InsertChair( name );
-                Console.WriteLine( "Created chair: ", +createChair + "\n" );
-                Console.WriteLine( "Success.\n" );
-            }
+
+            int createChair = QueryСlass.InsertChair( name );
+            Console.WriteLine( "Created chair: ", +createChair + "\n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void AddCourse()
@@ -230,48 +213,43 @@ namespace MyUniversity
             Console.WriteLine();
             Console.WriteLine( "Enter course name: " );
             string name = Console.ReadLine();
-
-            ReadInstructors();
-            Console.WriteLine( "Enter course instructor id: " );
-            int instructorId;
-            bool isDigit = Int32.TryParse( Console.ReadLine(), out instructorId );
-
             if ( name == "" )
             {
                 Console.WriteLine( "Course name is empty, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
+
+            ReadInstructors();
+            Console.WriteLine( "Enter course instructor id: " );
+            int instructorId;
+            if ( !Int32.TryParse( Console.ReadLine(), out instructorId ) )
             {
-                if ( !isDigit )
+                Console.WriteLine( "Instructor id is not digit, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+
+            List<Instructor> instructors = QueryСlass.ReadInstructors();
+            int counter = 0;
+            foreach ( Instructor instructor in instructors )
+            {
+                if ( instructor.InstructorId == instructorId )
                 {
-                    Console.WriteLine( "Instructor id is not digit, please enter command again\n" );
-                    Console.WriteLine( "Error.\n" );
-                }
-                else
-                {
-                    List<Instructor> instructors = QueryСlass.ReadInstructors();
-                    int counter = 0;
-                    foreach ( Instructor instructor in instructors )
-                    {
-                        if ( instructor.InstructorId == instructorId )
-                        {
-                            counter++;
-                        }
-                    }
-                    if ( counter != 0 )
-                    {
-                        int createCourse = QueryСlass.InsertCourse( name, instructorId );
-                        Console.WriteLine( "Created course: ", +createCourse + "\n" );
-                        Console.WriteLine( "Success.\n" );
-                    }
-                    else
-                    {
-                        Console.WriteLine( "This instructor id is not in the table, please enter command again\n" );
-                        Console.WriteLine( "Error.\n" );
-                    }
+                    counter++;
                 }
             }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This instructor id is not in the table, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            int createCourse = QueryСlass.InsertCourse( name, instructorId );
+            Console.WriteLine( "Created course: ", +createCourse + "\n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void AddGroup()
@@ -279,18 +257,16 @@ namespace MyUniversity
             Console.WriteLine();
             Console.WriteLine( "Enter group name: " );
             string name = Console.ReadLine();
-
             if ( name == "" )
             {
                 Console.WriteLine( "Group name is empty, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
-            {
-                int createGroup = QueryСlass.InsertGroup( name );
-                Console.WriteLine( "Created group: ", +createGroup + "\n" );
-                Console.WriteLine( "Success.\n" );
-            }
+
+            int createGroup = QueryСlass.InsertGroup( name );
+            Console.WriteLine( "Created group: ", +createGroup + "\n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void AddOccupation()
@@ -298,48 +274,42 @@ namespace MyUniversity
             Console.WriteLine();
             Console.WriteLine( "Enter occupation name: " );
             string name = Console.ReadLine();
-
-            ReadCourses();
-            Console.WriteLine( "Enter occupation course id: " );
-            int courseId;
-            bool isDigit = Int32.TryParse( Console.ReadLine(), out courseId );
-
             if ( name == "" )
             {
                 Console.WriteLine( "Occupation name is empty, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
+
+            ReadCourses();
+            Console.WriteLine( "Enter occupation course id: " );
+            int courseId;
+            if ( !Int32.TryParse( Console.ReadLine(), out courseId ) )
             {
-                if ( !isDigit )
+                Console.WriteLine( "Course id is not digit, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            List<Course> courses = QueryСlass.ReadCourses();
+            int counter = 0;
+            foreach ( Course course in courses )
+            {
+                if ( course.CourseId == courseId )
                 {
-                    Console.WriteLine( "Course id is not digit, please enter command again\n" );
-                    Console.WriteLine( "Error.\n" );
-                }
-                else
-                {
-                    List<Course> courses = QueryСlass.ReadCourses();
-                    int counter = 0;
-                    foreach ( Course course in courses )
-                    {
-                        if ( course.CourseId == courseId )
-                        {
-                            counter++;
-                        }
-                    }
-                    if ( counter != 0 )
-                    {
-                        int createOccupation = QueryСlass.InsertOccupation( name, courseId );
-                        Console.WriteLine( "Created occupation: ", +createOccupation + "\n" );
-                        Console.WriteLine( "Success.\n" );
-                    }
-                    else
-                    {
-                        Console.WriteLine( "This course id is not in the table, please enter command again\n" );
-                        Console.WriteLine( "Error.\n" );
-                    }
+                    counter++;
                 }
             }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This course id is not in the table, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            int createOccupation = QueryСlass.InsertOccupation( name, courseId );
+            Console.WriteLine( "Created occupation: ", +createOccupation + "\n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void AddGroupToOccupation()
@@ -348,66 +318,58 @@ namespace MyUniversity
             ReadGroups();
             Console.WriteLine( "Enter group id: " );
             int groupId;
-            bool isDigit1 = Int32.TryParse( Console.ReadLine(), out groupId );
+            if ( !Int32.TryParse( Console.ReadLine(), out groupId ) )
+            {
+                Console.WriteLine( "Group id is not digit, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
 
             ReadOccupations();
             Console.WriteLine( "Enter occupation id: " );
             int occupationId;
-            bool isDigit2 = Int32.TryParse( Console.ReadLine(), out occupationId );
-
-            if ( !isDigit1 )
+            if ( !Int32.TryParse( Console.ReadLine(), out occupationId ) )
             {
-                Console.WriteLine( "Group id is not digit, please enter command again\n" );
+                Console.WriteLine( "Occupation id is not digit, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
+
+            List<Group> groups = QueryСlass.ReadGroups();
+            int counter = 0;
+            foreach ( Group group in groups )
             {
-                if ( !isDigit2 )
+                if ( group.GroupId == groupId )
                 {
-                    Console.WriteLine( "Occupation id is not digit, please enter command again\n" );
-                    Console.WriteLine( "Error.\n" );
-                }
-                else
-                {
-                    List<Group> groups = QueryСlass.ReadGroups();
-                    int counter = 0;
-                    foreach ( Group group in groups )
-                    {
-                        if ( group.GroupId == groupId )
-                        {
-                            counter++;
-                        }
-                    }
-                    if ( counter != 0 )
-                    {
-                        counter = 0;
-                        List<Occupation> occupations = QueryСlass.ReadOccupations();
-                        foreach ( Occupation occupation in occupations )
-                        {
-                            if (occupation.OccupationId == occupationId)
-                            {
-                                counter++;
-                            }
-                        }
-                        if (counter != 0)
-                        {
-                            QueryСlass.InsertGroup_Occupation( groupId, occupationId );
-                            Console.WriteLine( "Created group to occupation \n" );
-                            Console.WriteLine( "Success.\n" );
-                        }
-                        else
-                        {
-                            Console.WriteLine( "This occupation id is not in the table occupation, please enter command again\n" );
-                            Console.WriteLine( "Error.\n" );
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine( "This group id is not in the table group, please enter command again\n" );
-                        Console.WriteLine( "Error.\n" );
-                    }
+                    counter++;
                 }
             }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This group id is not in the table group, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            counter = 0;
+            List<Occupation> occupations = QueryСlass.ReadOccupations();
+            foreach ( Occupation occupation in occupations )
+            {
+                if ( occupation.OccupationId == occupationId )
+                {
+                    counter++;
+                }
+            }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This occupation id is not in the table occupation, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            QueryСlass.InsertGroup_Occupation( groupId, occupationId );
+            Console.WriteLine( "Created group to occupation \n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void ChangeInstructorOnCourse()
@@ -416,66 +378,58 @@ namespace MyUniversity
             ReadCourses();
             Console.WriteLine( "Enter course id: " );
             int courseId;
-            bool isDigit1 = Int32.TryParse( Console.ReadLine(), out courseId );
+            if ( !Int32.TryParse( Console.ReadLine(), out courseId ) )
+            {
+                Console.WriteLine( "Course id is not digit, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
 
             ReadInstructors();
             Console.WriteLine( "Enter instructor id: " );
             int instructorId;
-            bool isDigit2 = Int32.TryParse( Console.ReadLine(), out instructorId );
-
-            if ( !isDigit1 )
+            if ( !Int32.TryParse( Console.ReadLine(), out instructorId ) )
             {
-                Console.WriteLine( "Course id is not digit, please enter command again\n" );
+                Console.WriteLine( "Instructor id is not digit, please enter command again\n" );
                 Console.WriteLine( "Error.\n" );
+                return;
             }
-            else
+
+            List<Course> courses = QueryСlass.ReadCourses();
+            int counter = 0;
+            foreach ( Course course in courses )
             {
-                if ( !isDigit2 )
+                if ( course.CourseId == courseId )
                 {
-                    Console.WriteLine( "Instructor id is not digit, please enter command again\n" );
-                    Console.WriteLine( "Error.\n" );
-                }
-                else
-                {
-                    List<Course> courses = QueryСlass.ReadCourses();
-                    int counter = 0;
-                    foreach ( Course course in courses )
-                    {
-                        if ( course.CourseId == courseId )
-                        {
-                            counter++;
-                        }
-                    }
-                    if ( counter != 0 )
-                    {
-                        List<Instructor> instructors = QueryСlass.ReadInstructors();
-                        counter = 0;
-                        foreach ( Instructor instructor in instructors )
-                        {
-                            if ( instructor.InstructorId == instructorId )
-                            {
-                                counter++;
-                            }
-                        }
-                        if ( counter != 0 )
-                        {
-                            QueryСlass.UpdateCourse( courseId, instructorId );
-                            Console.WriteLine( "Changet instructor in group \n" );
-                            Console.WriteLine( "Success.\n" );
-                        }
-                        else
-                        {
-                            Console.WriteLine( "This instructor id is not in the table, please enter command again\n" );
-                            Console.WriteLine( "Error.\n" );
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine( "This course id is not in the table, please enter command again\n" );
-                        Console.WriteLine( "Error.\n" );
-                    }
+                    counter++;
                 }
             }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This course id is not in the table, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            List<Instructor> instructors = QueryСlass.ReadInstructors();
+            counter = 0;
+            foreach ( Instructor instructor in instructors )
+            {
+                if ( instructor.InstructorId == instructorId )
+                {
+                    counter++;
+                }
+            }
+            if ( counter == 0 )
+            {
+                Console.WriteLine( "This instructor id is not in the table, please enter command again\n" );
+                Console.WriteLine( "Error.\n" );
+                return;
+            }
+
+            QueryСlass.UpdateCourse( courseId, instructorId );
+            Console.WriteLine( "Changet instructor in group \n" );
+            Console.WriteLine( "Success.\n" );
         }
 
         public static void ReportOccupations()

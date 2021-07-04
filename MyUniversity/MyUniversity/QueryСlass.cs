@@ -245,7 +245,6 @@ namespace MyUniversity
 
         public static int InsertStudent( string studentName, int age, int groupId )
         {
-
             using ( SqlConnection connection = new SqlConnection( _connectionString ) )
             {
                 connection.Open();
@@ -273,7 +272,6 @@ namespace MyUniversity
 
         public static int InsertInstructor( string instructorName, int chairId )
         {
-
             using ( SqlConnection connection = new SqlConnection( _connectionString ) )
             {
                 connection.Open();
@@ -298,7 +296,6 @@ namespace MyUniversity
 
         public static int InsertChair( string chairName )
         {
-
             using ( SqlConnection connection = new SqlConnection( _connectionString ) )
             {
                 connection.Open();
@@ -320,7 +317,6 @@ namespace MyUniversity
 
         public static int InsertCourse( string courseName, int instructorId )
         {
-
             using ( SqlConnection connection = new SqlConnection( _connectionString ) )
             {
                 connection.Open();
@@ -345,7 +341,6 @@ namespace MyUniversity
 
         public static int InsertGroup( string groupName )
         {
-
             using ( SqlConnection connection = new SqlConnection( _connectionString ) )
             {
                 connection.Open();
@@ -367,7 +362,6 @@ namespace MyUniversity
 
         public static int InsertOccupation( string occupationName, int courseId )
         {
-
             using ( SqlConnection connection = new SqlConnection( _connectionString ) )
             {
                 connection.Open();
@@ -392,7 +386,6 @@ namespace MyUniversity
 
         public static void InsertGroup_Occupation( int groupId, int occupationId )
         {
-
             using ( SqlConnection connection = new SqlConnection( _connectionString ) )
             {
                 connection.Open();
